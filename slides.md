@@ -118,7 +118,7 @@ Supervised machine learning method that functions by using a linear decision fun
 
 ### Evaluation Metrics
 
-- Accuracy
+- Accuracy: *Of all the predictions the model made, how many were correct?? 
 
 ![Accuracy Formula](images/accuracy_formula.png)
 
@@ -126,7 +126,7 @@ Supervised machine learning method that functions by using a linear decision fun
 
 ### Evaluation Metrics
 
-- Precision
+- Precision: *Of all the cases the model predicted as positive, how many were actually positive?*
 
 ![Precision Formula](images/precision_formula.png)
 
@@ -134,7 +134,7 @@ Supervised machine learning method that functions by using a linear decision fun
 
 ### Evaluation Metrics
 
-- Recall
+- Recall: *Of all the actual positive cases, how many did the model correctly detect?*
 
 ![Recall Formula](images/recall_formula.png)
 
@@ -142,7 +142,7 @@ Supervised machine learning method that functions by using a linear decision fun
 
 ### Evaluation Metrics
 
-- F-1 Score
+- F-1 Score: *How well does the model balance precision and recall into a single score?*
 
 ![F-1 Score Formula](images/f1_formula.png)
 
