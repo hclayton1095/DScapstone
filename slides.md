@@ -159,9 +159,7 @@ Supervised machine learning method that functions by using a linear decision fun
 ![SVM Stock Market Predictions Confusion Matrix](images/confusion_matrix.png)
 
 ---
-
 ![SVM Confusion Matrix](images/metric_results.png)
-
 ---
 
 ### ROC Curve
