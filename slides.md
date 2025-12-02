@@ -148,19 +148,17 @@ Supervised machine learning method that functions by using a linear decision fun
 
 ---
 
-### Sentiment Analysis Class Distributions
+#### Sentiment Analysis Class Distributions
 
 ![VADER, finVADER, finBERT, and Manual Sentiment Analysis Distributions Comparison](images/sentiment_analysis.png)
 
 ---
 
-### SVM Stock Market Prediction Results
+#### SVM Stock Market Prediction Results
 
 ![SVM Stock Market Predictions Confusion Matrix](images/confusion_matrix.png)
 
 ---
-
-Evaluation Metric Results
 
 ![SVM Confusion Matrix](images/metric_results.png)
 
