@@ -70,7 +70,7 @@ The inputs used for the SVM model come from two main sources. First, we generate
 After merging the sentiment and pricing data, we constructed a supervised dataset where the target variable represents whether the next day’s closing price increased or decreased. SVM was chosen as one of the classification models in order to test whether sentiment features improve the separation of these two classes. The rbf kernel was selected for its efficiency and strong performance on structured financial datasets. The performance of the final model will allow us to compare how well sentiment-driven features contribute to forecasting compared to models that rely only on numerical market indicators.
 
 ### 2.5 Evaluation Metrics
-We will evaluate the performance of the SVM model using a variety of methods: accuracy, precision, recall, and F-1 score. Accuracy score is the percentage of true positives and true negatives correctly identified by the model.
+We will evaluate the performance of the SVM model using a variety of methods: accuracy, precision, recall, and F-1 score. Accuracy score is the percentage of true positives and true negatives correctly identified by the model. *Of all the predictions the model made, how many were correct?*
 
 $$
 \text{Accuracy Score} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Predictions}}
@@ -80,7 +80,7 @@ $$
 
 While accuracy is an important metric, additional methods will be required to understand the model's true ability to make predictions on stock price movements: Precision, Recall, and F-1 Score. The results of each metric will then be averaged and weighted to provide an overall evaluation.
 
-Precision score measures the model’s ability to correctly identify true positives. Of all the actual positives, how many were predicted positive?
+Precision score measures the model’s ability to correctly identify true positives. *Of all the cases the model predicted as positive, how many were actually positive?*
 
 $$
 \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
@@ -88,7 +88,7 @@ $$
 
 *Figure 3. Precision formula*
 
-Recall score measures the model’s ability to correctly identify a stock's movements as a true positive or negative or a false positive or negative. Of all the predictions, how many were actually correct?
+Recall measures the model’s ability to correctly identify the positive class, calculated as the proportion of actual positive cases that are correctly predicted as positive. *Of all the actual positive cases, how many did the model correctly detect?*
 
 $$
 \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
@@ -96,7 +96,7 @@ $$
 
 *Figure 4. Recall formula*
 
-F-1 Score measures the balance between precision and recall. Does the model balance all predictions or does it favor one type?
+F-1 Score measures the balance between precision and recall. *How well does the model balance precision and recall into a single score?*
 
 $$
 \text{F1} = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
