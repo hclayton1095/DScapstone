@@ -1,6 +1,3 @@
----
----
-
 # Welcome to Our Project
 Use your arrow keys to navigate
 
