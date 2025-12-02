@@ -112,7 +112,7 @@ Use your arrow keys to navigate
 
 Supervised machine learning method that functions by using a linear decision function
 
-
+![SVM Decision Function](images/svm_formula.png)
 
 ---
 
