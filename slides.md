@@ -108,15 +108,13 @@ Use your arrow keys to navigate
 
 ---
 
-#### Support Vector Machines (SVM)
-
-Supervised machine learning method that functions by using a linear decision function
+#### SVM Decision Function
 
 ![SVM Decision Function](images/svm_formula.png)
 
-- The features **X** represent the variables used for next-day prediction.
-- The feature weights **W** represents how strongly the model separates upward and downward movement classes.
-- The bias term **b** shifts the decision boundary to improve classification accuracy.
+- The features ***x*** represent the variables used for next-day prediction.
+- The feature weights ***w*** represents how strongly the model separates upward and downward movement classes.
+- The bias term ***b*** shifts the decision boundary to improve classification accuracy.
 
 ---
 
