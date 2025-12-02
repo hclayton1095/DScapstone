@@ -210,15 +210,27 @@ plt.show()
 
 ### 3.4 Sentiment Analysis Class Distributions
 
+To evaluate the reliability of our automated sentiment classification methods, we created a manually labeled subset of 400 tweets. Three models were compared against these human-assigned labels: VADER, finVADER, and finBERT. Each method produced positive, neutral, or negative labels, which were aligned with the manual classifications to measure agreement.
+
 ![VADER, finVADER, finBERT, and Manual Sentiment Analysis Class Distribution Comparison](<./images/sentiment_analysis.png>)
 
 *Figure 6. Sentiment Analysis Class Distribution of VADER, finVADER, finBERT, and Manual Sentiment Analysis*
 
-### 3.5 SVM Model Results
+Across the 400-tweet evaluation set, VADER demonstrated the strongest alignment with human judgment, outperforming both finVADER and finBERT. This higher agreement supported its use as the primary labeling engine for the full dataset. Additionally, VADER offered two practical advantages:
+ (1) faster runtime across the 4.3 million tweet corpus, and
+ (2) consistent, interpretable scoring suitable for downstream aggregation.
+ 
+Although finVADER and finBERT incorporate financial-domain specificity and transformer-based contextual understanding, they did not surpass VADER in agreement with human labels in our sample. Given the computational demands of these models and the scale of our dataset, the performance-to-cost tradeoff justified selecting VADER as our final sentiment classifier.
+
+### 3.5 SVM Stock Market Prediction Results
+
+After sentiment labeling was completed, the aggregated daily sentiment features were merged with daily stock price data to construct the supervised learning dataset. The Support Vector Machine (SVM) model was trained to classify next-day stock movement as either positive or negative. Performance was evaluated using accuracy, precision, recall, F1 score, and confusion matrix analysis.
 
 ![Confusion Matrix](<./images/confusion_matrix.png>)
 
 *Figure 7. Confusion Matrix*
+
+This distribution indicates that the model correctly identified 907 negative-movement days and 320 positive-movement days, while misclassifying 489 false positives and 473 false negatives.
 
 ### 3.6 Evaluation Metrics
 
@@ -266,7 +278,30 @@ $$
 
 *Figure 8. ROC Curve*
 
+### 3.7 Interpretation
+
+The SVM model demonstrated moderate predictive ability with an overall accuracy of 56.07 percent, which is above random chance for a binary classification task but still limited in practical predictive power. Incorporating sentiment features improved interpretability but produced only modest gains relative to expected market-based baselines.
+
+A key observation from the confusion matrix is the model’s difficulty classifying both positive and negative movements with high precision. The false positive and false negative counts are relatively high, suggesting overlapping feature distributions between up-movement and down-movement classes. This may indicate that: 
+- Sentiment signals from Twitter, while directionally informative, are noisy.
+- Daily aggregation may lose temporal nuance.
+- That next-day movement is influenced more strongly by market variables than by public sentiment alone.
+
+Despite these limitations, the model highlights that sentiment features do contribute measurable predictive information, and their inclusion supports the broader hypothesis that public online discourse reflects market psychology.
+
 ## 4. Conclusion
+
+### Limitations
+While informative, only human-labeling a 400-tweet subset is a relatively small sample compared to the full dataset. While the subset offers a meaningful comparison, future research could expand the manually labeled set to strengthen the validation process and further benchmark model performance. 
+For the SVM prediction model, Several constraints influenced the final performance:
+- The rbf kernel, chosen for efficiency with large datasets, may underfit complex patterns.
+- Sentiment was reduced to three categories, limiting granularity.
+- Merging at the daily level may obscure intraday sentiment–price relationships.
+  
+Future research could explore nonlinear kernels, ensemble models, or intraday sentiment features, as well as deeper fine-tuned transformer models for improved classification.
+
+### Conclusion
+The results show that the SVM model captures some relationship between Twitter sentiment and next-day stock movement, but the predictive strength remains moderate. Nevertheless, this analysis supports the idea that sentiment can supplement traditional market indicators and offers a foundation for more advanced predictive modeling in the future.
 
 ## References
 
