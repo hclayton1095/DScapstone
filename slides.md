@@ -116,5 +116,59 @@ Supervised machine learning method that functions by using a linear decision fun
 
 ---
 
+### Evaluation Metrics
 
+- Accuracy
+
+![Accuracy Formula](images/accuracy_formula.png)
+
+---
+
+### Evaluation Metrics
+
+- Precision
+
+![Precision Formula](images/precision_formula.png)
+
+---
+
+### Evaluation Metrics
+
+- Recall
+
+![Recall Formula](images/recall_formula.png)
+
+---
+
+### Evaluation Metrics
+
+- F-1 Score
+
+![F-1 Score Formula](images/f1_formula.png)
+
+---
+
+### Sentiment Analysis Class Distributions
+
+![VADER, finVADER, finBERT, and Manual Sentiment Analysis Distributions Comparison](images/sentiment_analysis.png)
+
+---
+
+### SVM Stock Market Prediction Results
+
+![SVM Stock Market Predictions Confusion Matrix](images/confusion_matrix.png)
+
+---
+
+Evaluation Metric Results
+
+![SVM Confusion Matrix](images/metric_results.png)
+
+---
+
+### ROC Curve
+
+![ROC Curve](images/roc_curve.png)
+
+---
 
