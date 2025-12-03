@@ -230,15 +230,15 @@ Use your arrow keys to navigate
 
 #### Sentiment Analysis Class Distributions Interpretation
 - Manual labels show roughly 39% positive, 44% neutral, and 17% negative tweets.
-- VADER most closely matches the manual distribution across all three classes (positive, neutral, and negative).
-- finVADER shifts more tweets into the neutral class and underestimates both positive and negative sentiment.
-- finBERT is highly conservative, predicting an overwhelming majority of tweets as neutral and very few as positive or negative.
+- VADER most closely matched the manual distribution across all three classes (positive, neutral, and negative).
+- finVADER favored the neutral class and underestimated positive and negative sentiment.
+- finBERT overwhelming favored the neutral class with under 13% positive and negative identification.
 
 ---
 
 #### Sentiment Analysis Class Distributions Interpretation (Continued)
 
-- Overall, VADER was chosen for the final model as it most closely aligns with the distribution of manual sentiment analysis.
+- Overall, VADER was chosen for the final model as it most closely aligned with the distribution of manual sentiment analysis.
 
 ---
 
