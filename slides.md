@@ -334,7 +334,7 @@ Use your arrow keys to navigate
 ### Final Remarks
 
 - While sentiment analysis offers valuable insights, predicting stock prices requires a more comprehensive feature set.
-- This study shows that sentiment contributes *some* signal, but not enough for reliable next-day prediction.
+- This study shows that sentiment contributes *some* signal, but sentiment alone is not enough for reliable next-day prediction.
 - Future enhancements can build on this foundation to explore deeper relationships between public opinion and market activity.
 
 ---
