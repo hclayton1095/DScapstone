@@ -120,8 +120,7 @@ Preprocessing is a critical step in preparing unstructured text data for machine
 
 <details>
   <summary>Code</summary>
-
-```
+  <pre><code class="language-python">
 plt.figure(figsize=(14, 6))
 finished_dataset['date'] = pd.to_datetime(finished_dataset['date'])
 tweets_per_month = finished_dataset.groupby(finished_dataset['date'].dt.to_period('M')).size()
@@ -132,7 +131,7 @@ plt.ylabel('Number of Tweets', fontsize=12)
 plt.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
-```
+  </code></pre>
 </details>
 
 ![Tweet Volume Over Time](<./images/Tweet-volume-over-time.png>)
