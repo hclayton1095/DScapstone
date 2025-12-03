@@ -217,7 +217,7 @@ Use your arrow keys to navigate
 
 ### Manual Labeling Comparison
 
-- A subset of 200 tweets was manually labeled for evaluation.
+- A subset of 400 tweets were manually labeled for evaluation.
 - Comparing automated vs. manual label distributions provides a human-quality benchmark.
 
 ---
