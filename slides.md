@@ -258,7 +258,7 @@ Use your arrow keys to navigate
 
 ---
 
-![Metric Results](images/metric_results.png)
+![Metric Results](images/metric_v2.png)
 
 ---
 
