@@ -13,18 +13,46 @@ Use your arrow keys to navigate
 
 ---
 
+### Background & Motivation
+
+- Twitter(X) generates millions of real-time posts expressing public opinion.
+- Investor sentiment can influence short-term stock movements.
+- This project examines whether Twitter sentiment can help predict next-day stock direction.
+
+---
+
+### Research Problem
+
+- Traditional financial indicators do not fully capture rapid shifts in public sentiment.
+- We investigate:
+  - Whether tweet sentiment can be quantified reliably.
+  - Whether sentiment correlates with next-day stock movement.
+  - Whether SVM can convert sentiment into accurate predictions of future stock price.
+
+---
+
+### Project Overview
+
+- Collect tweets referencing major publicly traded companies.
+- Apply multiple sentiment methods (VADER, finVADER, finBERT).
+- Compare automated sentiment to manual labeling.
+- Train an SVM model to predict next-day stock direction.
+- Evaluate with accuracy, precision, recall, F1, and ROC curves.
+
+---
+
 ### Sentiment Analysis
 
 - Sentiment analysis is the process of analyzing text to derive the underlying emotions being expressed in a collection of data.
-  - Allows companies to understand how stakeholders ***feel*** about their brand, products, or direction at a large scale.
-  - Used across a variety of industries including technology, finance, and retail.
+- Allows companies to understand how stakeholders ***feel*** about their brand, products, or direction at a large scale.
+- Used across a variety of industries including technology, finance, and retail.
 
 ---
 
 ### Twitter(X)'s Role & Advantages for Sentiment Analysis
 
 - With over 586 million active users, Twitter(X) contains a wealth of user sentiment from all over the globe.
-  - Every day, millions of users flock to the site to share their opinions, news, humor, and feelings about a multitude of topics.
+- Every day, millions of users flock to the site to share their opinions, news, humor, and feelings about a multitude of topics.
 
 ---
 
@@ -32,95 +60,105 @@ Use your arrow keys to navigate
 
 - With a maximum character limit of 280, Twitter(X) is the premier social media site for short-form content.
   - Short form content has several benefits for sentiment analysis:
-    - Less computationally intensive
-    - Reduced storage requirements
-    - Greater availability of training data
+    - Less computationally intensive.
+    - Reduced storage requirements.
+    - Greater availability of training data.
 
 ---
 
-### Why is Sentiment Analysis Important
+### Why is Sentiment Analysis Important?
 
 - The constant flow of data makes Twitter(X) an invaluable resource for analyzing trends in public sentiment.
 - In financial markets, these sentiments can serve as indicators of investor confidence, public reactions, and potential price fluctuations.
-- Prior studies demonstrate that analyzing sentiment from Twitter posts can effectively reflect investor sentiment and broader market trends
+- Prior studies demonstrate that analyzing sentiment from Twitter posts can effectively reflect investor sentiment and broader market trends.
 
 ---
 
 ### Goal of our project
 
-- *Perform sentiment analysis on Twitter(X) data related to publicly traded companies to determine the possibility and accuracy of predicting the price movements of stock prices based on user sentiment.*
+*Perform sentiment analysis on Twitter(X) data related to publicly traded companies to determine the possibility and accuracy of predicting the price movements of stock prices based on user sentiment.*
 
 ---
 
-# Methods
+# METHODS
 
 ---
 
 ### Sentiment Analysis
 
-- We selected three primary methods for sentiment Analysis:
-  - Valence Aware Dictionary and sEntiment Reasoner (VADER)
-  - Financial Valence Aware Dictionary and sEntiment Reasoner (finVADER)
-  - Financial Bidirectional Encoder Representations from Transformers (finBERT)
+- We selected three primary methods for sentiment analysis:
+  - VADER
+  - finVADER
+  - finBERT
 
 ---
 
 ### VADER
 
-- Developed in 2014 by C.J. Hutto and Eric Gilbert at the Georgia Institute of Technology.
-- Lexicon based with library of common words and phrases. Assigns a score to each word and aggregates to determine positive, neutral, or negative sentiment.
-- Designed specifically for "micro-blog like text" used in social media sites like Twitter(X).
-- Requires no training data which allows extremely fast operation. 
+- Developed in 2014 by C.J. Hutto and Eric Gilbert at Georgia Tech.
+- Lexicon-based with a library of common words and phrases.
+- Designed specifically for micro-blog style text.
+- Requires no training data → extremely fast.
 
 ---
 
 ### finVADER
 
 - Developed in 2023 by Petr Koráb.
-- Open-source adaptation of VADER model with additional financial domain-specific lexicons.
-- Trained on financial texts like earnings reports, news articles, and finance specific tweets.
+- Open-source adaptation of VADER with financial domain-specific lexicons.
+- Trained on financial texts including news, earnings reports, and finance tweets.
 
 ---
 
 ### BERT
 
-- Deep learning language model developed by researchers at Google in 2018.
-- Revolutionary in Natural Language Processing by introducing deep bidirectional training or transformer encoders.
-- Bidirectional mechanism considers preceding and following context simultaneously, allowing deeper language understanding.
-- Excels at a variety of tasks including question answering, search query ranking, next-sentence prediction, and sentiment analysis.
+- Deep learning language model developed by Google in 2018.
+- Introduced bidirectional transformers.
+- Excels at contextual language understanding.
 
 ---
 
 ### finBERT
 
-- Open-source, domain-specific adaptation of the BERT model introduced by Dogu Tan Araci in 2019.
-- Pre-trained and fine-tuned on financial texts to deliver improved performance on data involving uncommon financial specific terminology.
-- Requires far more computational resources and training times when compared to lexicon based approaches such as VADER.
+- Open-source, domain-specific adaptation of BERT introduced by Dogu Tan Araci in 2019.
+- Pre-trained and fine-tuned on financial texts.
+- More accurate for financial terminology but computationally heavier.
 
 ---
 
 ### Support Vector Machines (SVM)
 
-- Once sentiment analysis is complete, SVM will be used to make predictions on stock price movement.
-  - SVM is a Supervised machine learning method that excels in classification tasks.
-  - Commonly used in financial research for its ability to detect patterns in market movement.
-  - Prior studies, notably by Chakraborty et al., have shown SVM models outperform other approaches in stock price prediction. 
+- Once sentiment analysis is complete, SVM is used to make predictions on stock price movement.
+  - SVM is a supervised machine learning method that excels in classification tasks.
+  - Commonly used in financial research for detecting patterns.
 
 ---
 
-#### SVM Decision Function
+### Support Vector Machines (SVM)
 
 ![SVM Decision Function](images/svm_formula.png)
 
-- The features ***x*** represent the variables used for next-day prediction.
-- The feature weights ***w*** represents how strongly the model separates upward and downward movement classes.
-- The bias term ***b*** shifts the decision boundary to improve classification accuracy.
+- The features **x** represent the variables used for next-day prediction.
+- The feature weights **w** represent how strongly the model separates upward and downward movement classes.
+- The bias term **b** shifts the decision boundary to improve classification accuracy.
+
+---
+
+### SVM Model Setup
+
+- Features used:
+  - Sentiment scores
+  - Lagged stock price movement
+  - Date-based indicators
+- RBF kernel selected for its ability to capture nonlinear patterns in the data.
+- Balanced class weights applied.
+- Predicts next-day “up” or “down.” stock price movement.
 
 ---
 
 ### Evaluation Metrics
 
-- Accuracy: *Of all the predictions the model made, how many were correct?*
+- Accuracy: Of all predictions made, how many were correct?
 
 ![Accuracy Formula](images/accuracy_formula.png)
 
@@ -128,7 +166,7 @@ Use your arrow keys to navigate
 
 ### Evaluation Metrics
 
-- Precision: *Of all the cases the model predicted as positive, how many were actually positive?*
+- Precision: Of all predicted positives, how many were correct?
 
 ![Precision Formula](images/precision_formula.png)
 
@@ -136,7 +174,7 @@ Use your arrow keys to navigate
 
 ### Evaluation Metrics
 
-- Recall: *Of all the actual positive cases, how many did the model correctly detect?*
+- Recall: Of all actual positives, how many were detected?
 
 ![Recall Formula](images/recall_formula.png)
 
@@ -144,33 +182,86 @@ Use your arrow keys to navigate
 
 ### Evaluation Metrics
 
-- F-1 Score: *How well does the model balance precision and recall into a single score?*
+- F-1 Score: Balances precision and recall.
 
-![F-1 Score Formula](images/f1_formula.png)
+![F1 Score Formula](images/f1_formula.png)
+
+---
+
+# ANALYSIS & RESULTS
+
+---
+
+### Data Collection & Preprocessing
+
+- Data gathered from:
+  - NASDAQ daily stock price data
+  - Twitter(X) posts filtered by company tickers
+- Tweet preprocessing included:
+  - Removing links, emojis, punctuation
+  - Lowercasing
+  - Removing stopwords
+- Stock prices were converted into binary “up” or “down” labels.
+
+---
+
+### Why Compare Multiple Sentiment Methods?
+
+- Each model captures sentiment differently:
+  - VADER: Fast, general-purpose social media lexicon.
+  - finVADER: Adds financial terminology.
+  - finBERT: Deep learning model providing contextual accuracy.
+- Comparing methods highlights tradeoffs and identifies the strongest predictor.
+
+---
+
+### Manual Labeling for Ground Truth
+
+- A subset of tweets was manually labeled for evaluation.
+- Manual labels provide a human-quality benchmark.
 
 ---
 
 #### Sentiment Analysis Class Distributions
 
-![VADER, finVADER, finBERT, and Manual Sentiment Analysis Distributions Comparison](images/sentiment_analysis.png)
+![Sentiment Distribution](images/sentiment_analysis.png)
+
+---
+### Sentiment Analysis Class Distributions (Interpretation)
+- Manual labels show roughly 39% positive, 44% neutral, and 17% negative tweets.
+- VADER most closely matches the manual distribution across all three classes (positive, neutral, and negative).
+- finVADER shifts more tweets into the neutral class and underestimates both positive and negative sentiment.
+- finBERT is highly conservative, predicting an overwhelming majority of tweets as neutral and very few as positive or negative.
+- Overall, VADER best replicates the manual sentiment proportions, while finBERT is much more neutral-heavy.
 
 ---
 
 #### SVM Stock Market Prediction Results
 
-![SVM Stock Market Predictions Confusion Matrix](images/confusion_matrix.png)
+![Confusion Matrix](images/confusion_matrix.png)
 
 ---
 
-#### Evaluation Metric Results
+### Confusion Matrix (Interpretation)
 
-![Accuracy and Precision Scores](images/accuracy_precision.png)
+- TN = 907: model correctly predicted many downward movements.
+- TP = 320: upward movements correctly predicted but lower volume.
+- FP = 489: predicted ‘up’ when price fell.
+- FN = 473: predicted ‘down’ when price rose.
+- High FN count matches low precision/recall for upward movement.
 
 ---
 
-#### Evaluation Metric Results
+![Metric Results](images/metric_results.png)
 
-![Recall and F-1 Scores](images/recall_f1.png)
+---
+
+### Model Performance Summary
+
+- **Accuracy ≈ 0.5607** indicates moderate overall performance.
+- **Precision ≈ 0.3950** shows difficulty predicting true upward movements.
+- **Recall ≈ 0.4030** indicates limited ability to detect actual upward movement cases.
+- **F1 ≈ 0.3980** reflects the model’s weak balance between precision and recall.
 
 ---
 
@@ -179,4 +270,64 @@ Use your arrow keys to navigate
 ![ROC Curve](images/roc_curve.png)
 
 ---
+
+### ROC Curve (Interpretation)
+- The ROC curve has an AUC of approximately **0.54**, only slightly above random guessing (0.50).
+- The curve stays close to the diagonal line, indicating weak discriminatory ability.
+- The model struggles to meaningfully separate upward vs. downward price movements.
+- This performance is typical for next-day prediction tasks using sentiment alone, as market movement is influenced by many factors beyond public sentiment.
+- While the model shows minor improvement over chance, the ROC confirms that predictive power remains limited.
+---
+
+# CONCLUSION
+
+---
+
+### Key Takeaways
+
+- Twitter(X) provides a valuable real-time snapshot of public sentiment, but sentiment alone is not a strong predictor of next-day stock movement.
+- Among sentiment methods, **VADER most closely matched manual sentiment**, while **finBERT** produced highly neutral-leaning classifications.
+- The SVM model using an **RBF kernel** achieved moderate accuracy (**≈ 56%**), with notable difficulty identifying upward movements.
+
+---
+
+### Model Performance Insights
+
+- High false negatives indicate the model frequently missed actual price increases.
+- Precision, recall, and F1 all fell below **0.41**, confirming limited predictive strength.
+- The ROC curve (**AUC ≈ 0.54**) shows performance only slightly above random guessing.
+- These results highlight the difficulty of forecasting short-term market behavior using sentiment alone.
+
+---
+
+### Limitations
+
+- Tweet sentiment may not reflect the full spectrum of investor behavior.
+- Bots, spam, and noisy social media language introduce additional variability.
+- Using only next-day binary movement oversimplifies complex market dynamics.
+- Market movement is heavily influenced by external factors not captured in tweets.
+
+---
+
+### Future Work
+
+- Incorporate additional financial indicators (volume, volatility indices, macroeconomic trends).
+- Explore more advanced machine learning models (LSTM, transformers, ensemble methods).
+- Analyze longer prediction windows (multi-day or weekly movement).
+- Experiment with more robust sentiment models and richer tweet metadata (engagement metrics, verified accounts, timestamps).
+
+---
+
+### Final Remarks
+
+- While sentiment analysis offers valuable insights, predicting stock prices requires a more comprehensive feature set.
+- This study shows that sentiment contributes *some* signal, but not enough for reliable next-day prediction.
+- Future enhancements can build on this foundation to explore deeper relationships between public opinion and market activity.
+
+---
+
+
+
+
+
 
