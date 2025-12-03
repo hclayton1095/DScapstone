@@ -326,6 +326,18 @@ Use your arrow keys to navigate
 
 ---
 
+#### References
+
+![References Part 1](images/references_p1.png)
+
+---
+
+#### References
+
+![References Part 2](images/references_p2.png)
+
+---
+
 
 
 
