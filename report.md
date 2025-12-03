@@ -138,7 +138,9 @@ plt.show()
 
 #### Average Stock Closing Prices Over Time
 
-```python
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
 plt.figure(figsize=(14, 6))
 top_companies = finished_dataset['ticker_symbol'].value_counts().head(4).index # Top four to match the last visualization
 for company in top_companies:
@@ -151,16 +153,16 @@ plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
-```
+  </code></pre>
+</details>
 
 ![Average Stock Closing Prices Over Time](<./images/Stock-price-over-time.png>)
 
 #### Average Stock Prices vs. Tweet Volume
 
-```python
-# Average stock prices at closing overlaid ontop of tweet volume
-# I'm looking for correlation between tweet volume and stock price swings
-
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
 sns.set_style("dark")
 plt.style.use("dark_background")
 
@@ -207,7 +209,8 @@ for idx, company in enumerate(top_companies):
 
 plt.tight_layout()
 plt.show()
-```
+ </code></pre>
+</details>
 
 ![Average Stock Prices vs. Tweet Volume](<./images/tweet-volume-stock-price.png>)
 
