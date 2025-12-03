@@ -215,10 +215,10 @@ Use your arrow keys to navigate
 
 ---
 
-### Manual Labeling for Ground Truth
+### Manual Labeling Comparison
 
-- A subset of tweets was manually labeled for evaluation.
-- Manual labels provide a human-quality benchmark.
+- A subset of 200 tweets was manually labeled for evaluation.
+- Comparing automated vs. manual label distributions provides a human-quality benchmark.
 
 ---
 
@@ -227,12 +227,18 @@ Use your arrow keys to navigate
 ![Sentiment Distribution](images/sentiment_analysis.png)
 
 ---
-### Sentiment Analysis Class Distributions (Interpretation)
+
+#### Sentiment Analysis Class Distributions Interpretation
 - Manual labels show roughly 39% positive, 44% neutral, and 17% negative tweets.
 - VADER most closely matches the manual distribution across all three classes (positive, neutral, and negative).
 - finVADER shifts more tweets into the neutral class and underestimates both positive and negative sentiment.
 - finBERT is highly conservative, predicting an overwhelming majority of tweets as neutral and very few as positive or negative.
-- Overall, VADER best replicates the manual sentiment proportions, while finBERT is much more neutral-heavy.
+
+---
+
+#### Sentiment Analysis Class Distributions Interpretation (Continued)
+
+- Overall, VADER was chosen for the final model as it most closely aligns with the distribution of manual sentiment analysis.
 
 ---
 
@@ -271,12 +277,19 @@ Use your arrow keys to navigate
 
 ---
 
-### ROC Curve (Interpretation)
+### ROC Curve Interpretation
+
 - The ROC curve has an AUC of approximately **0.54**, only slightly above random guessing (0.50).
 - The curve stays close to the diagonal line, indicating weak discriminatory ability.
 - The model struggles to meaningfully separate upward vs. downward price movements.
+
+---
+
+### ROC Curve Interpretation (Continued)
+
 - This performance is typical for next-day prediction tasks using sentiment alone, as market movement is influenced by many factors beyond public sentiment.
 - While the model shows minor improvement over chance, the ROC confirms that predictive power remains limited.
+
 ---
 
 # CONCLUSION
