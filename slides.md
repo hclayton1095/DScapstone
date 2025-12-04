@@ -5,7 +5,7 @@ Use your arrow keys to navigate
 
 ### Using Twitter Sentiment Analysis to Predict Stock Price Movements of Major Companies via Support Vector Machines
 
-##### Authors: Chris Charro, Hunter Clayton, Camille Esteves
+##### Authors: Chris Charo, Hunter Clayton, Camille Esteves
 
 ---
 
@@ -50,13 +50,6 @@ Use your arrow keys to navigate
 ---
 
 ### Twitter(X)'s Role & Advantages for Sentiment Analysis
-
-- With over 586 million active users, Twitter(X) contains a wealth of user sentiment from all over the globe.
-- Every day, millions of users flock to the site to share their opinions, news, humor, and feelings about a multitude of topics.
-
----
-
-### Twitter(X)'s Role & Advantages for Sentiment Analysis (Continued)
 
 - With a maximum character limit of 280, Twitter(X) is the premier social media site for short-form content.
   - Short form content has several benefits for sentiment analysis:
@@ -110,17 +103,10 @@ Use your arrow keys to navigate
 
 ---
 
-### BERT
-
-- Deep learning language model developed by Google in 2018.
-- Introduced bidirectional transformers.
-- Excels at contextual language understanding.
-
----
-
 ### finBERT
 
-- Open-source, domain-specific adaptation of BERT introduced by Dogu Tan Araci in 2019.
+- Open-source, domain-specific adaptation of BERT Model introduced by Dogu Tan Araci in 2019.
+- BERT: Deep leaning language model that pioneered bidirectional transformers. Developed by Google in 2018.
 - Pre-trained and fine-tuned on financial texts.
 - More accurate for financial terminology but computationally heavier.
 
@@ -128,7 +114,7 @@ Use your arrow keys to navigate
 
 ### Support Vector Machines (SVM)
 
-- Once sentiment analysis is complete, SVM is used to make predictions on stock price movement.
+- Once sentiment analysis is complete, SVM will be used to make predictions on stock price movement.
   - SVM is a supervised machine learning method that excels in classification tasks.
   - Commonly used in financial research for detecting patterns.
 
@@ -141,18 +127,6 @@ Use your arrow keys to navigate
 - The features **x** represent the variables used for next-day prediction.
 - The feature weights **w** represent how strongly the model separates upward and downward movement classes.
 - The bias term **b** shifts the decision boundary to improve classification accuracy.
-
----
-
-### SVM Model Setup
-
-- Features used:
-  - Sentiment scores
-  - Lagged stock price movement
-  - Date-based indicators
-- RBF kernel selected for its ability to capture nonlinear patterns in the data.
-- Balanced class weights applied.
-- Predicts next-day “up” or “down.” stock price movement.
 
 ---
 
@@ -205,19 +179,9 @@ Use your arrow keys to navigate
 
 ---
 
-### Why Compare Multiple Sentiment Methods?
-
-- Each model captures sentiment differently:
-  - VADER: Fast, general-purpose social media lexicon.
-  - finVADER: Adds financial terminology.
-  - finBERT: Deep learning model providing contextual accuracy.
-- Comparing methods highlights tradeoffs and identifies the strongest predictor.
-
----
-
 ### Manual Labeling Comparison
 
-- A subset of 400 tweets were manually labeled for evaluation.
+- I addition to our three automated tools, a subset of 400 tweets were manually labeled for evaluation.
 - Comparing automated vs. manual label distributions provides a human-quality benchmark.
 
 ---
@@ -248,16 +212,6 @@ Use your arrow keys to navigate
 
 ---
 
-### Confusion Matrix (Interpretation)
-
-- TN = 907: model correctly predicted many downward movements.
-- TP = 320: upward movements correctly predicted but lower volume.
-- FP = 489: predicted ‘up’ when price fell.
-- FN = 473: predicted ‘down’ when price rose.
-- High FN count matches low precision/recall for upward movement.
-
----
-
 ![Metric Results](images/metric_v2.png)
 
 ---
@@ -281,14 +235,7 @@ Use your arrow keys to navigate
 
 - The ROC curve has an AUC of approximately **0.54**, only slightly above random guessing (0.50).
 - The curve stays close to the diagonal line, indicating weak discriminatory ability.
-- The model struggles to meaningfully separate upward vs. downward price movements.
-
----
-
-### ROC Curve Interpretation (Continued)
-
 - This performance is typical for next-day prediction tasks using sentiment alone, as market movement is influenced by many factors beyond public sentiment.
-- While the model shows minor improvement over chance, the ROC confirms that predictive power remains limited.
 
 ---
 
