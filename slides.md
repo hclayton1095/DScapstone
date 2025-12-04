@@ -67,7 +67,7 @@ Use your arrow keys to navigate
 
 ---
 
-### Goal of our project
+### Project Objective
 
 *Perform sentiment analysis on Twitter(X) data related to publicly traded companies to determine the possibility and accuracy of predicting the price movements of stock prices based on user sentiment.*
 
@@ -181,7 +181,7 @@ Use your arrow keys to navigate
 
 ### Manual Labeling Comparison
 
-- I addition to our three automated tools, a subset of 400 tweets were manually labeled for evaluation.
+- In addition to our three automated tools, a subset of 400 tweets were manually labeled for evaluation.
 - Comparing automated vs. manual label distributions provides a human-quality benchmark.
 
 ---
@@ -196,7 +196,7 @@ Use your arrow keys to navigate
 - Manual labels show roughly 39% positive, 44% neutral, and 17% negative tweets.
 - VADER most closely matched the manual distribution across all three classes (positive, neutral, and negative).
 - finVADER favored the neutral class and underestimated positive and negative sentiment.
-- finBERT overwhelming favored the neutral class with under 13% positive and negative identification.
+- finBERT overwhelmingly favored the neutral class with under 13% positive and negative identification.
 
 ---
 
