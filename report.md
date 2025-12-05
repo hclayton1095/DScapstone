@@ -131,15 +131,20 @@ Support Vector Machines are a supervised learning method that performs well in h
 In our project, SVM is not used for classifying tweet sentiment. Instead, the model is applied to predict whether the next trading day will experience a positive or negative price movement. Our workflow focuses on merging sentiment outputs with historical pricing data, aligning timestamps, and preparing a supervised dataset where each row contains aggregated sentiment scores and market variables such as daily returns and volume. The SVM then learns a decision boundary that separates upward and downward price outcomes based on these combined features.
 The purpose of using SVM in this context is to evaluate whether sentiment derived from Twitter provides meaningful predictive value beyond standard market indicators. By observing how the SVM separates classes when sentiment features are included, we can assess whether social media signals contribute observable structure to short horizon price behavior.
 
-SVM determines a separating hyperplane using the following linear decision function:
+The non-linear kernel SVM model classifies into positive or negative class using the following decision function:
 
 $$
-f(x) = w_1 x + w_2 x^2 + \dots + w_n x^n + b
+f(x) = {sgn} \left( \sum_{i=1}^{m} y_i \alpha_i \, k(x, x_i) + b \right)
 $$
 
-*Figure 1. Linear SVM decision function*
+$$x$$: Input feature vector  
+$$m$$: Number of support vectors  
+$$y_i$$: Label of the **i**-th support vector (+1 or -1)  
+$$k(x, x_i)$$: Kernel function  
+$$b$$: Bias term  
+$$sgn$$: Sign function, outputs +1 or -1 classification  
 
-In this formulation, the features ($$x^i$$) represent the variables used for next-day prediction include daily sentiment indicators and market-based variables. For each day and ticker, we aggregated labels by counting the number of positive and negative tweets and converting them into daily sentiment proportions. These aggregated values were paired with the corresponding daily price change, which indicates whether the stock increased or decreased that day. Each feature weight ($$w_i$$) represents how strongly the model separates upward and downward movement classes, while the bias term  ($$b$$) shifts the decision boundary to improve classification accuracy [(Montesinos et al. 2022)](#ref12).
+*Figure 1. Non-linear kernel SVM decision function* [(Schölkopf et al. 2022)](#ref12).
 
 ### 2.6 Model Implementation in this Study
 The inputs used for the SVM model come from two main sources. First, we generated sentiment scores for each tweet using a combination of lexicon-based and transformer-based methods. These sentiment values were aggregated by date to match the daily resolution of the pricing data. Second, daily market features were added, including closing price change, opening price, high, low, and volume. 
@@ -493,7 +498,8 @@ The results show that the SVM model captures some relationship between Twitter s
 
 <a id="ref11"></a> Twitter Sentiment Analysis and Bitcoin Price Forecasting: Implications for Financial Risk Management. 2023. *ProQuest.* https://www.proquest.com/scholarly-journals/twitter-sentiment-analysis-bitcoin-price/docview/3047039752/se-2 [\[Back to Top\]](#top)  
 
-<a id="ref12"></a> Montesinos López, O.A., Montesinos López, A., Crossa, J. (2022). Support Vector Machines and Support Vector Regression. In: Multivariate Statistical Machine Learning Methods for Genomic Prediction. Springer, Cham. https://doi.org/10.1007/978-3-030-89010-0_9 [\[Back to Top\]](#top)  
+<a id="ref12"></a> Schölkopf, Bernhard, and Alexander J. Smola. Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond. Cambridge, MA: The MIT Press, 2002. Accessed December 5, 2025. https://mcube.lab.nycu.edu.tw/~cfung/docs/books/scholkopf2002learning_with_kernels.pdf
+. [\[Back to Top\]](#top)  
 
 <a id="ref13"></a> Chen, Tianqi, and Carlos Guestrin. “XGBoost: A Scalable Tree Boosting System.” In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 785–94. New York, NY, USA: ACM, 2016. https://doi.org/10.1145/2939672.2939785. [\[Back to Top\]](#top)  
 
