@@ -114,6 +114,56 @@ Once sentiment classification is complete, the results will be used to predict t
 ### 3.2 Data Preprocessing
 Preprocessing is a critical step in preparing unstructured text data for machine learning applications, especially when working with social media content that is often noisy, informal, and contextually ambiguous [(A Scoping Review of Preprocessing Methods 2023)](#ref2). The preprocessing phase for this project focused primarily on the textual component of the Twitter(X) dataset. Each tweet underwent a structured series of cleaning and transformation steps. Specifically, all text was first converted to lowercase to ensure consistency across the dataset. Subsequently, URLs, user mentions, hashtags, and stock symbols were removed, followed by tokenization based on whole words. Stop words were eliminated, with the exception of negation words such as 'not' and 'no,' which are critical in determining sentiment polarity. Lemmatization was then applied to reduce each word to its base form, allowing the models to better capture semantic meaning and context. Finally, the tweet body, a list of individually-separated words, are re-joined as a string [(Du et al. 2024)](#ref6). These preprocessing methods align closely with those recommended in prior research emphasizing the importance of context retention and dimensionality reduction in text classification tasks [(Financial Sentiment Analysis: Techniques and Applications 2024)](#ref7). Following these transformations, the finalized clean dataset was stored in a Pandas DataFrame, ready for sentiment classification.
 
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
+def lowercase_text(text):
+  return text.lower()
+
+finished_dataset['body'] = finished_dataset['body'].apply(lowercase_text)
+
+def remove_noise(text):
+  text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
+  text = re.sub(r'@\w+', '', text)
+  text = re.sub(r'\$[A-Z]+', '', text)
+  text = re.sub(r'[^a-z\s]', '', text)
+  text = ' '.join(text.split())
+  return text
+
+finished_dataset['body'] = finished_dataset['body'].apply(remove_noise)
+
+def tokenize_text(text):
+  tokens = word_tokenize(text)
+  return tokens
+
+finished_dataset['body'] = finished_dataset['body'].apply(tokenize_text)
+
+stop_words = set(stopwords.words('english'))
+
+negation_words = {'no', 'not', 'never', 'neither', 'nobody', 'nothing', 'nowhere', "n't"}
+stop_words = stop_words - negation_words
+
+def remove_stopwords(tokens):
+  filtered_tokens = [word for word in tokens if word not in stop_words and len(word) > 2]
+  return filtered_tokens
+
+finished_dataset['body'] = finished_dataset['body'].apply(remove_stopwords)
+
+import nltk
+from nltk.stem import WordNetLemmatizer
+nltk.download('wordnet')
+lemmatizer = WordNetLemmatizer()
+
+def lemmatize_tokens(tokens):
+  lemmatized = [lemmatizer.lemmatize(word) for word in tokens]
+  return lemmatized
+
+finished_dataset['body'] = finished_dataset['body'].apply(lemmatize_tokens)
+
+finished_dataset['body'] = finished_dataset['body'].apply(lambda x: ' '.join(x))
+  </code></pre>
+</details>
+
 ### 3.3 Dataset Visualizations
 
 #### Tweet Volume Over Time
