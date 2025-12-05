@@ -39,13 +39,90 @@ The remainder of this paper outlines the methodology for data preprocessing and 
 #### VADER
 VADER is a popular lexicon-based sentiment analysis tool created by C.J. Hutto and Eric Gilbert at the Georgia Institute of Technology. Developed in 2014, VADER was designed specifically as a sentiment analysis tool that excelled at analyzing social media or “micro-blog like text”. VADER maintains a massive library of common words and phrases and functions by assigning a valence and intensity level score to each word in a block of text and aggregating those scores to determine an overall sentiment into one of three classes: positive, neutral, or negative.VADER is particularly advantageous for sentiment analysis because it delivers strong accuracy without requiring training data and operates extremely quickly [(Hutto & Gilbert, 2014)](#ref16).
 
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
+vader = SentimentIntensityAnalyzer()
+
+def vader_sentiment(text):
+  scores = vader.polarity_scores(text)
+  compound = scores['compound']
+
+  if compound >= 0.05:
+    return 'positive'
+  elif compound <= -0.05:
+    return 'negative'
+  else:
+    return 'neutral'
+
+finished_dataset['vader_sentiment'] = finished_dataset['body'].apply(vader_sentiment)
+
+print("Some samples from the Tweets:")
+for i in range(5):
+  print(f"{i+1}, {finished_dataset['body'].iloc[i]}\n")
+print("\nSentiment distribution:")
+print(finished_dataset['vader_sentiment'].value_counts())
+  </code></pre>
+</details>
+
 #### finVADER
 FinVADER is an open-source adaptation of the original VADER model, developed by Petr Koráb in 2023. It extends VADER’s lexicon-based approach by incorporating financial domain-specific lexicons, such as SentiBignomics and Henry’s Finance Lexicon, enabling more accurate sentiment analysis on financial texts like earnings reports, news articles, and finance specific tweets. Like VADER, FinVADER assigns valence and intensity scores to words and aggregates them to determine overall sentiment. By integrating domain-specific vocabulary, FinVADER improves the model’s ability to detect subtle positive or negative cues that are unique to financial language, while retaining VADER’s advantages of speed and not requiring training data to operate [(Koráb, 2023)](#ref17).
+
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
+from tqdm import tqdm
+tqdm.pandas()
+
+def get_finvader_sentiment(text):
+  scores = finvader(text, use_sentibignomics=True, use_henry=True, indicator='compound')
+
+  if scores >= 0.05:
+    return 'positive'
+  elif scores <= -0.05:
+    return 'negative'
+  else:
+    return 'neutral'
+
+finished_dataset['sentiment_finVADER'] = finished_dataset['body'].progress_apply(get_finvader_sentiment)
+  </code></pre>
+</details>
 
 #### finBERT
 Bidirectional Encoder Representations from Transformers (BERT) is a deep learning language model developed by researchers at Google in 2018. BERT represented a major breakthrough in Natural Language Processing by introducing deep bidirectional training of transformer encoders. Prior to BERT, most NLP models processed text in a single direction (left-to-right or right-to-left), which limited their ability to capture full context and understand the relationships between words across a sentence. BERT’s bidirectional self-attention mechanism allows it to consider both preceding and following context simultaneously, resulting in much deeper language understanding. It has been widely adopted for tasks such as question answering, search query ranking, next-sentence prediction, text classification, and sentiment analysis [(Devlin et al., 2019)](#ref18).
 
 Similar to finVADER, finBERT is an open-source, domain-specific adaptation of the original BERT model. Introduced by Dogu Tan Araci in 2019, finBERT retains BERT’s underlying transformer architecture but is further pre-trained and fine-tuned on financial texts such as analyst reports, company announcements, and financial news. This domain adaptation enables the model to better capture financial terminology, linguistic patterns, and subtle sentiment cues, resulting in improved performance for financial sentiment classification tasks [(Araci, 2019)](#ref19).
+
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
+from tqdm import tqdm
+
+sentiments = []
+batch_size = 4096
+
+for i in tqdm(range(0, len(finished_dataset), batch_size)):
+  texts = finished_dataset.iloc[i:i+batch_size]['body'].tolist()
+
+  inputs = tokenizer(texts,
+                     add_special_tokens=True,
+                     max_length=512,
+                     truncation=True,
+                     padding=True,
+                     return_attention_mask=True,
+                     return_tensors='pt').to(device)
+
+  with torch.no_grad():
+    outputs = model(**inputs)
+    sentiment = torch.nn.functional.softmax(outputs.logits, dim=1)
+    sentiment_labels = sentiment.argmax(dim=1).cpu().numpy()
+    label_map = {0: 'positive', 1: 'negative', 2: 'neutral'}
+    batch_sentiments = [label_map[label] for label in sentiment_labels]
+    sentiments.extend(batch_sentiments)
+
+finished_dataset['finbert_sentiment'] = sentiments
+  </code></pre>
+</details>
 
 
 ### 2.2 Support Vector Machines (SVM)
@@ -281,6 +358,21 @@ Although finVADER and finBERT incorporate financial-domain specificity and trans
 ### 3.5 SVM Stock Market Prediction Results
 
 After sentiment labeling was completed, the aggregated daily sentiment features were merged with daily stock price data to construct the supervised learning dataset. The Support Vector Machine (SVM) model was trained to classify next-day stock movement as either positive or negative. Performance was evaluated using accuracy, precision, recall, F1 score, and confusion matrix analysis.
+
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=[0, 1, 2], yticklabels=[0, 1, 2])
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.title('Confusion Matrix')
+plt.show()
+  </code></pre>
+</details>
 
 ![Confusion Matrix](<./images/confusion_matrix.png>)
 
