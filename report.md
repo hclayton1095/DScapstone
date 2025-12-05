@@ -382,6 +382,24 @@ This distribution indicates that the model correctly identified 907 negative-mov
 
 ### 3.6 Evaluation Metrics
 
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+final_model = SVC(kernel='rbf', C=best_C, gamma=best_gamma, class_weight='balanced')
+final_model.fit(X_train_scaled, y_train)
+
+y_pred = final_model.predict(X_test_scaled)
+accuracy = accuracy_score(y_test, y_pred)
+
+print("Final Model Results")
+print(f"Test Accuracy: {accuracy*100:.2f}%)")
+print("Confusion Matrix")
+cm = confusion_matrix(y_test, y_pred)
+print(cm)
+  </code></pre>
+</details>
+
 #### Accuracy
 
 $$
