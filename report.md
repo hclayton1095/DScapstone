@@ -139,7 +139,7 @@ $$
 
 $$x$$: Input feature vector  
 $$m$$: Number of support vectors  
-$$y_i$$: Label of the **i**-th support vector (+1 or -1)  
+$$y_i$$: Label of the $$i$$-th support vector (+1 or -1)  
 $$k(x, x_i)$$: Kernel function  
 $$b$$: Bias term  
 $$sgn$$: Sign function, outputs +1 or -1 classification  
