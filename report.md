@@ -144,7 +144,7 @@ $$k(x, x_i)$$: Kernel function
 $$b$$: Bias term  
 $$sgn$$: Sign function, outputs +1 or -1 classification  
 
-*Figure 1. Non-linear kernel SVM decision function* [(Schölkopf et al. 2022)](#ref12).
+*Figure 1. Non-linear kernel SVM decision function* [(Schölkopf et al. 2002)](#ref12).
 
 ### 2.6 Model Implementation in this Study
 The inputs used for the SVM model come from two main sources. First, we generated sentiment scores for each tweet using a combination of lexicon-based and transformer-based methods. These sentiment values were aggregated by date to match the daily resolution of the pricing data. Second, daily market features were added, including closing price change, opening price, high, low, and volume. 
