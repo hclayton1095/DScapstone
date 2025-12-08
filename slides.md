@@ -122,11 +122,7 @@ Use your arrow keys to navigate
 
 ### Support Vector Machines (SVM)
 
-![SVM Decision Function](images/svm_formula.png)
-
-- The features **x** represent the variables used for next-day prediction.
-- The feature weights **w** represent how strongly the model separates upward and downward movement classes.
-- The bias term **b** shifts the decision boundary to improve classification accuracy.
+![SVM Decision Function](images/formula_v2.png)
 
 ---
 
