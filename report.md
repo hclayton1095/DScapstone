@@ -449,9 +449,18 @@ $$
 
 *Figure 8. ROC Curve*
 
-### 3.7 Interpretation
+### ROC Curve
 
-The SVM model demonstrated moderate predictive ability with an overall accuracy of 56.07 percent, which is above random chance for a binary classification task but still limited in practical predictive power. Incorporating sentiment features improved interpretability but produced only modest gains relative to expected market-based baselines.
+The ROC curve provides a broader view of the SVM model’s predictive behavior by evaluating performance across all classification thresholds and summarizing the trade-off between the true positive rate and false positive rate. In financial prediction settings, sentiment signals may be noisy and influenced by external factors.
+
+The model performs only slightly better than random chance, with an AUC of approximately 0.54, and the curve’s close alignment with the diagonal reference line suggests difficulty in differentiating stock price direction based solely on Twitter(X) sentiment.
+
+Class imbalances, ambiguous sentiment, and linguistic variability reduce signal clarity, and prior work notes that context-aware models often outperform traditional classifiers. Overall, the ROC curve reinforces that sentiment alone is challenging for predicting next-day stock movement, and hybrid approaches combining financial indicators and sentiment are recommended [(Financial Sentiment Analysis: Techniques and Applications 2024)](#ref7).
+
+
+### 3.8 Interpretation
+
+The SVM model demonstrated minimal predictive ability with an overall accuracy of 56.07 percent, which is above random chance for a binary classification task but still limited in practical predictive power. Incorporating sentiment features improved interpretability but produced only modest gains relative to expected market-based baselines.
 
 A key observation from the confusion matrix is the model’s difficulty classifying both positive and negative movements with high precision. The false positive and false negative counts are relatively high, suggesting overlapping feature distributions between up-movement and down-movement classes. This may indicate that: 
 - Sentiment signals from Twitter, while directionally informative, are noisy.
@@ -462,7 +471,7 @@ Despite these limitations, the model highlights that sentiment features do contr
 
 ## 4. Conclusion
 
-### Limitations
+### 4.1 Limitations
 While informative, only human-labeling a 400-tweet subset is a relatively small sample compared to the full dataset. While the subset offers a meaningful comparison, future research could expand the manually labeled set to strengthen the validation process and further benchmark model performance. 
 For the SVM prediction model, Several constraints influenced the final performance:
 - The rbf kernel, chosen for efficiency with large datasets, may underfit complex patterns.
@@ -471,7 +480,7 @@ For the SVM prediction model, Several constraints influenced the final performan
   
 Future research could explore nonlinear kernels, ensemble models, or intraday sentiment features, as well as deeper fine-tuned transformer models for improved classification.
 
-### Conclusion
+### 4.2 Concluding Remarks
 The results show that the SVM model captures some relationship between Twitter sentiment and next-day stock movement, but the predictive strength remains moderate. Nevertheless, this analysis supports the idea that sentiment can supplement traditional market indicators and offers a foundation for more advanced predictive modeling in the future.
 
 ## References
