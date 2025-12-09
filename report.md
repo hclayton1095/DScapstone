@@ -146,12 +146,12 @@ $$sgn$$: Sign function, outputs +1 or -1 classification
 
 *Figure 1. Non-linear kernel SVM decision function* [(Schölkopf et al. 2002)](#ref12).
 
-### 2.6 Model Implementation in this Study
+### 2.3 Model Implementation in this Study
 The inputs used for the SVM model come from two main sources. First, we generated sentiment scores for each tweet using a combination of lexicon-based and transformer-based methods. These sentiment values were aggregated by date to match the daily resolution of the pricing data. Second, daily market features were added, including closing price change, opening price, high, low, and volume. 
 
 After merging the sentiment and pricing data, we constructed a supervised dataset where the target variable represents whether the next day’s closing price increased or decreased. SVM was chosen as one of the classification models in order to test whether sentiment features improve the separation of these two classes. The rbf kernel was selected for its efficiency and strong performance on structured financial datasets. The performance of the final model will allow us to compare how well sentiment-driven features contribute to forecasting compared to models that rely only on numerical market indicators.
 
-### 2.5 Evaluation Metrics
+### 2.4 Evaluation Metrics
 We will evaluate the performance of the SVM model using a variety of methods: accuracy, precision, recall, and F-1 score. Accuracy score is the percentage of true positives and true negatives correctly identified by the model. *Of all the predictions the model made, how many were correct?*
 
 $$
@@ -362,7 +362,7 @@ Although finVADER and finBERT incorporate financial-domain specificity and trans
 
 ### 3.5 SVM Stock Market Prediction Results
 
-After sentiment labeling was completed, the aggregated daily sentiment features were merged with daily stock price data to construct the supervised learning dataset. The Support Vector Machine (SVM) model was trained to classify next-day stock movement as either positive or negative. Performance was evaluated using accuracy, precision, recall, F1 score, and confusion matrix analysis.
+After sentiment labeling was completed, the aggregated daily sentiment features were merged with daily stock price data to construct the supervised learning dataset. The Support Vector Machine (SVM) model was trained to classify next-day stock movement as either positive or negative. Performance was evaluated using accuracy, precision, recall, F1 score, ROC Curve, and confusion matrix analysis.
 
 <details>
   <summary>Code</summary>
@@ -449,7 +449,7 @@ $$
 
 *Figure 8. ROC Curve*
 
-### ROC Curve
+### 3.7 ROC Curve
 
 The ROC curve provides a broader view of the SVM model’s predictive behavior by evaluating performance across all classification thresholds and summarizing the trade-off between the true positive rate and false positive rate. In financial prediction settings, sentiment signals may be noisy and influenced by external factors.
 
@@ -481,7 +481,7 @@ For the SVM prediction model, Several constraints influenced the final performan
 Future research could explore nonlinear kernels, ensemble models, or intraday sentiment features, as well as deeper fine-tuned transformer models for improved classification.
 
 ### 4.2 Concluding Remarks
-The results show that the SVM model captures some relationship between Twitter sentiment and next-day stock movement, but the predictive strength remains moderate. Nevertheless, this analysis supports the idea that sentiment can supplement traditional market indicators and offers a foundation for more advanced predictive modeling in the future.
+The results show that the SVM model captures some relationship between Twitter sentiment and next-day stock movement, but the predictive strength remains moderate. Nevertheless, this analysis supports the idea that sentiment can supplement traditional market indicators and offers a foundation for more advanced predictive modeling in future analysis.
 
 ## References
 
