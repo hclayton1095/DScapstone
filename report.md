@@ -534,7 +534,7 @@ The results show that the SVM model captures some relationship between Twitter s
 
 <a id="ref19"></a> Araci, Dogu. “FinBERT: Financial Sentiment Analysis with Pre-Trained Language Models,” 2019. https://doi.org/10.48550/arxiv.1908.10063. [\[Back to Top\]](#top)  
 
-<a id="ref20"></a> Tam, Adrian. “A Gentle Introduction to Particle Swarm Optimization.” MachineLearningMastery.com, October 12, 2021. https://machinelearningmastery.com/a-gentle-introduction-to-particle-swarm-optimization/
+<a id="ref20"></a> Tam, Adrian. “A Gentle Introduction to Particle Swarm Optimization.” MachineLearningMastery.com, October 12, 2021. https://machinelearningmastery.com/a-gentle-introduction-to-particle-swarm-optimization/. [\[Back to Top\]](#top)  
  
 ## Glossary
 Twitter(X) — In 2022, Twitter was acquired and rebranded as X. Although the dataset used in this report contains pre-acquisition data, we reference both names for clarity and to preserve the original meaning and context.  
