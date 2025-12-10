@@ -470,6 +470,35 @@ A key observation from the confusion matrix is the model’s difficulty classify
 Despite these limitations, the model highlights that sentiment features do contribute measurable predictive information, and their inclusion supports the broader hypothesis that public online discourse reflects market psychology.
 
 ### 3.9 Hyperparameter Tuning via Particle Swarm Optimization
+
+<details>
+  <summary>Code</summary>
+  <pre><code class="language-python">
+from sklearn.svm import SVC
+from sklearn.model_selection import cross_val_score
+!pip install pyswarm
+from pyswarm import pso
+
+def objective(params):
+    C = params[0]
+    gamma = params[1]
+
+    svm = SVC(kernel='rbf', C=C, gamma=gamma, class_weight='balanced')
+    scores = cross_val_score(svm, X_train_scaled, y_train, cv=5, scoring='f1_macro')
+
+    return -scores.mean()
+
+best_params, _ = pso(objective,
+lb=[0.01, 0.0001],
+ub=[100, 1.0],
+swarmsize=15,
+maxiter=20)
+
+best_C = best_params[0]
+best_gamma = best_params[1]
+  </code></pre>
+</details>
+
 Prior to determining our final SVM model, we utilized Particle Swarm Optimization (PSO) To determine the optimal hyperparameters. PSO is a heuristic approach that mimics the behavior of swarming animals by combining their individual efforts across the entire swarm to maximize results.
 
 An important step in setting up the PSO code is establishing the upper and lower bounds, which together define the search space. For an SVM using an RBF kernel, the C and Gamma parameters create a two-dimensional search space, with one parameter on the x-axis and the other on the y-axis. PSO uses individual elements, called particles, which act like independent animals within a group. A predefined number of particles are initialized and randomly placed within the search space. These particles then explore their local areas for the coordinates that yield the best result, under the assumption that a point with a good outcome will likely continue to improve in its immediate vicinity. The particles then communicate their findings to the swarm collectively. As a result, individual particles can begin moving toward the better results discovered by the group and, ideally, work together to identify the parameters that produce the “best” result.
