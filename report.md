@@ -469,6 +469,16 @@ A key observation from the confusion matrix is the model’s difficulty classify
 
 Despite these limitations, the model highlights that sentiment features do contribute measurable predictive information, and their inclusion supports the broader hypothesis that public online discourse reflects market psychology.
 
+### 3.9 Hyperparameter Tuning via Particle Swarm Optimization
+Prior to determining our final SVM model, we utilized Particle Swarm Optimization (PSO) To determine the optimal hyperparameters. PSO is a heuristic approach that mimics the behavior of swarming animals by combining their individual efforts across the entire swarm to maximize results.
+
+An important step in setting up the PSO code is establishing the upper and lower bounds, which together define the search space. For an SVM using an RBF kernel, the C and Gamma parameters create a two-dimensional search space, with one parameter on the x-axis and the other on the y-axis. PSO uses individual elements, called particles, which act like independent animals within a group. A predefined number of particles are initialized and randomly placed within the search space. These particles then explore their local areas for the coordinates that yield the best result, under the assumption that a point with a good outcome will likely continue to improve in its immediate vicinity. The particles then communicate their findings to the swarm collectively. As a result, individual particles can begin moving toward the better results discovered by the group and, ideally, work together to identify the parameters that produce the “best” result.
+
+The fact that particles are randomly scattered and will search somewhat independently is especially useful for avoiding local minima, whereas algorithms such as gradient descent may misidentify a local minimum as a global minimum. While PSO can incorporate additional parameters such as velocity and inertia, we used a more basic form that included only swarm size and maximum iterations [(Tam, 2021)](#ref20)
+
+While PSO was useful in our hyperparameter tuning experimentation, it did not significantly improve the model’s predictive performance. Although additional optimization methods could potentially yield further improvements, we believe the results, even after applying PSO, support our conclusion that Twitter sentiment alone is not sufficient to reliably predict future stock performance.
+
+
 ## 4. Conclusion
 
 ### 4.1 Limitations
@@ -523,6 +533,8 @@ The results show that the SVM model captures some relationship between Twitter s
 <a id="ref18"></a> Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. “BERT: Pre-training of deep bidirectional transformers for language understanding.” Proceedings of the 2019 Conference of the North 2019:4171-. https://doi.org/10.18653/v1/n19-1423. [\[Back to Top\]](#top)  
 
 <a id="ref19"></a> Araci, Dogu. “FinBERT: Financial Sentiment Analysis with Pre-Trained Language Models,” 2019. https://doi.org/10.48550/arxiv.1908.10063. [\[Back to Top\]](#top)  
+
+<a id="ref20"></a> Tam, Adrian. “A Gentle Introduction to Particle Swarm Optimization.” MachineLearningMastery.com, October 12, 2021. https://machinelearningmastery.com/a-gentle-introduction-to-particle-swarm-optimization/
  
 ## Glossary
 Twitter(X) — In 2022, Twitter was acquired and rebranded as X. Although the dataset used in this report contains pre-acquisition data, we reference both names for clarity and to preserve the original meaning and context.  
